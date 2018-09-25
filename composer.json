@@ -1,0 +1,25 @@
+{
+    "name": "oxygencms/core",
+    "type": "laravel package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Blagoev",
+            "email": "mb.reppair@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Oxygencms\\Core\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oxygencms\\Core\\CoreServiceProvider"
+            ]
+        }
+    }
+}

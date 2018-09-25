@@ -13,7 +13,10 @@
     "autoload": {
         "psr-4": {
             "Oxygencms\\Core\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {

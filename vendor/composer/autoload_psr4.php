@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Oxygencms\\Pages\\' => array($baseDir . '/src'),
+    'Oxygencms\\Core\\' => array($baseDir . '/src'),
 );

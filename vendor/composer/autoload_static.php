@@ -6,15 +6,19 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit3beac4a9ffe9cf5597c1fbbf49fa54e4
 {
+    public static $files = array (
+        '41a306bfa1843a13d22723b1e64a777d' => __DIR__ . '/../..' . '/src/helpers.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'O' => 
         array (
-            'Oxygencms\\Pages\\' => 16,
+            'Oxygencms\\Core\\' => 15,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Oxygencms\\Pages\\' => 
+        'Oxygencms\\Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

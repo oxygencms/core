@@ -1,11 +1,11 @@
 {
     "name": "oxygencms/core",
-    "type": "laravel package",
+    "description": "Oxy admin core",
     "license": "MIT",
     "authors": [
         {
-            "name": "Martin Blagoev",
-            "email": "mb.reppair@gmail.com"
+            "name": "Pavel Pavlov",
+            "email": "pavlovp@icloud.com"
         }
     ],
     "minimum-stability": "dev",
@@ -13,7 +13,10 @@
     "autoload": {
         "psr-4": {
             "Oxygencms\\Core\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {

@@ -2,22 +2,29 @@
 
 namespace Oxygencms\Core;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Oxygencms\Core\Middleware\BackOfficeAccess;
+use Oxygencms\Core\Middleware\SetLocale;
 use Oxygencms\Core\Middleware\IntendedUrl;
+use Oxygencms\Core\Middleware\BackOfficeAccess;
 
 class CoreServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
      *
+     * @param Router $router
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
-        $router = $this->app['router'];
         $router->pushMiddlewareToGroup('web', IntendedUrl::class);
-        $router->middleware('admin', BackOfficeAccess::class);
+        $router->pushMiddlewareToGroup('web', SetLocale::class);
+        $router->aliasMiddleware('admin', BackOfficeAccess::class);
+
+        $this->publishes([
+            __DIR__.'/Config/oxygen.php' => config_path('oxygen.php')
+        ], 'config');
     }
 
     /**
@@ -29,5 +36,9 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->app->register('Oxygencms\Core\Providers\RouteServiceProvider');
         $this->app->register('Oxygencms\Core\Providers\AuthServiceProvider');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/Config/oxygen.php', 'oxygen'
+        );
     }
 }

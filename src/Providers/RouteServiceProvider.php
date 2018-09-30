@@ -2,9 +2,9 @@
 
 namespace Oxygencms\Core\Providers;
 
+use Oxygencms\Core\Controllers\LanguageController;
 use Validator;
-use App\Rules\ClassExists;
-//use Illuminate\Routing\Route;
+use Oxygencms\Core\Rules\ClassExists;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -43,6 +43,9 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapAdminRoutes();
+
+        // Set Locale
+        Route::get('lang/{lang}', LanguageController::class . '@setLocale')->name('language');
     }
 
     /**

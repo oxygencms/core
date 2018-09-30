@@ -3,6 +3,7 @@
 namespace Oxygencms\Core;
 
 use Illuminate\Routing\Router;
+use Oxygencms\Core\Gates\Gate;
 use Illuminate\Support\ServiceProvider;
 use Oxygencms\Core\Middleware\SetLocale;
 use Oxygencms\Core\Middleware\IntendedUrl;
@@ -18,6 +19,8 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+        (new Gate)->registerAuthGate();
+        
         $router->pushMiddlewareToGroup('web', IntendedUrl::class);
         $router->pushMiddlewareToGroup('web', SetLocale::class);
         $router->aliasMiddleware('admin', BackOfficeAccess::class);
@@ -39,6 +42,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Config/oxygen.php' => config_path('oxygen.php')
         ], 'config');
+
+        \View::share('error_message', "<small class='text-danger'>:message</small>");
     }
 
     /**
@@ -49,7 +54,6 @@ class CoreServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register('Oxygencms\Core\Providers\RouteServiceProvider');
-        $this->app->register('Oxygencms\Core\Providers\AuthServiceProvider');
 
         $this->mergeConfigFrom(
             __DIR__.'/Config/oxygen.php', 'oxygen'

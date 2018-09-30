@@ -9,7 +9,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "oxygencms/users": "@dev"
+    },
     "autoload": {
         "psr-4": {
             "Oxygencms\\Core\\": "src/"

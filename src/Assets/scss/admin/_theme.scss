@@ -1,0 +1,21 @@
+
+@import "../../fonts/SourceSansPro/SourceSansPro";
+
+$font-family-base: Source Sans Pro, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+$headings-font-family: $font-family-base;
+
+$primary: #4DC0B5;
+$secondary: #B8C2CC;
+$success: #38C172;
+$danger: #E3342F;
+$info: #F6993F;
+$warning: #FFED4A;
+$light: #FDFBF7;
+$dark: #313A45;
+
+$enable-gradients: false;
+$link-color: $dark;
+$spacer: 1rem;
+$border-width: 1px;
+$btn-border-radius: .25rem;

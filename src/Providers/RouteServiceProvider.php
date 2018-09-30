@@ -61,7 +61,9 @@ class RouteServiceProvider extends ServiceProvider
              ->prefix('admin')
              ->namespace($this->namespace)
              ->group(function () {
-                 require __DIR__ . '/../Routes/admin.php';
+                 Route::patch('update/active/{model_name}/{model_id}', 'ModelController@updateActive');
+                 Route::delete('seek-and-destroy/{model_name}/{model_id}', 'ModelController@destroy');
+                 Route::get('/', 'DashboardController@index')->name('admin.dashboard');
              });
     }
 

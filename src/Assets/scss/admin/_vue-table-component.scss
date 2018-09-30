@@ -1,0 +1,125 @@
+.table-component {
+  *,
+  *:after,
+  *:before {
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    &:not(.badge) {
+      padding: 0;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  &__filter {
+    align-self: flex-end;
+
+    &__field {
+      padding: 0 1.25em 0 .75em;
+      height: 2.5em;
+      border: solid 2px #e0e0e0;
+      border-radius: 2em;
+      font-size: inherit;
+
+      &:focus {
+        outline: 0;
+        border-color: #007593;
+      }
+    }
+
+    &__clear {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2em;
+      color: #007593;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+  &__table-wrapper {
+    overflow-x: auto;
+    margin: 1em 0;
+    width: 100%;
+    border: solid 1px #ddd;
+    border-bottom: none;
+  }
+
+  &__table {
+    min-width: 100%;
+    border-collapse: collapse;
+    border-bottom: solid 1px #ddd;
+    table-layout: fixed;
+
+    &__caption {
+      position: absolute;
+      top: auto;
+      left: -10000px;
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+    }
+
+    & th,
+    & td {
+      padding: .75em 1.25em;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    & th {
+      background-color: #e0e0e0;
+      color: #999;
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-size: .85em;
+    }
+
+    & tbody tr:nth-child(even) {
+      background-color: #f0f0f0;
+    }
+
+    & a {
+      color: #007593;
+    }
+  }
+
+  &__message {
+    color: #999;
+    font-style: italic;
+  }
+
+  &__th--sort,
+  &__th--sort-asc,
+  &__th--sort-desc {
+    text-decoration: underline;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &__th--sort-asc:after,
+  &__th--sort-desc:after {
+    position: absolute;
+    left: .25em;
+    display: inline-block;
+    color: #bbb;
+  }
+
+  &__th--sort-asc:after {
+    content: '↑';
+  }
+
+  &__th--sort-desc:after {
+    content: '↓';
+  }
+}

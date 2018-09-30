@@ -22,6 +22,20 @@ class CoreServiceProvider extends ServiceProvider
         $router->pushMiddlewareToGroup('web', SetLocale::class);
         $router->aliasMiddleware('admin', BackOfficeAccess::class);
 
+        $this->loadViewsFrom(__DIR__.'/Views', 'oxygencms');
+
+        $this->publishes([
+            __DIR__.'/Views' => resource_path('views/vendor/oxygencms'),
+        ], 'views');
+
+        $this->publishes([
+            __DIR__.'/Assets' => resource_path('vendor/oxygencms'),
+        ], 'vendor-assets');
+
+        $this->publishes([
+            __DIR__.'/Assets' => resource_path(),
+        ], 'assets');
+
         $this->publishes([
             __DIR__.'/Config/oxygen.php' => config_path('oxygen.php')
         ], 'config');

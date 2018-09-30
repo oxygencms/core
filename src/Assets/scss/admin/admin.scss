@@ -1,0 +1,58 @@
+@import "theme";
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "components/overwrites";
+
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+@import "~vue-good-table/src/styles/style";
+
+@import "dropzone-uploads";
+
+@import "vue-table-component";
+
+@import "utils";
+
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+
+    #oxy {
+      min-height: 100%;
+      display: flex;
+
+      @import "components/sidebar";
+
+      .content-wrapper {
+        position: relative;
+        min-height: 100%;
+        flex: 1;
+
+        @import "components/navigation";
+
+        .content {
+          min-height: calc(100% - 40px);
+        }
+
+        .o-build {
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translate(-50%);
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.o-long-select {
+  min-height: 350px;
+}
+
+#mceu_32 {
+  display: none !important;
+}

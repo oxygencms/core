@@ -10,7 +10,10 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "oxygencms/users": "@dev"
+        "oxygencms/users": "@dev",
+        "oxygencms/menues": "@dev",
+        "oxygencms/blocks": "@dev",
+        "oxygencms/commands": "@dev"
     },
     "autoload": {
         "psr-4": {

@@ -11,6 +11,7 @@
     "minimum-stability": "dev",
     "require": {
         "oxygencms/users": "@dev",
+        "oxygencms/pages": "@dev",
         "oxygencms/menus": "@dev",
         "oxygencms/blocks": "@dev",
         "oxygencms/commands": "@dev"

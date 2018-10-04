@@ -12,6 +12,7 @@
     "require": {
         "oxygencms/users": "@dev",
         "oxygencms/pages": "@dev",
+        "oxygencms/phrases": "@dev",
         "oxygencms/menus": "@dev",
         "oxygencms/blocks": "@dev",
         "oxygencms/commands": "@dev"

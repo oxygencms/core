@@ -1,6 +1,6 @@
 <?php
 
-namespace Oxygencms\Core\Providers;
+namespace Oxygencms\Core;
 
 use Validator;
 use Oxygencms\Core\Rules\ClassExists;

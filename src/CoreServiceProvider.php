@@ -32,15 +32,11 @@ class CoreServiceProvider extends ServiceProvider
         ], 'views');
 
         $this->publishes([
-            __DIR__.'/Assets' => resource_path('vendor/oxygencms'),
-        ], 'vendor-assets');
-
-        $this->publishes([
-            __DIR__.'/Assets' => resource_path(),
+            __DIR__.'/../assets' => resource_path(),
         ], 'assets');
 
         $this->publishes([
-            __DIR__.'/Config/oxygen.php' => config_path('oxygen.php')
+            __DIR__.'/../config/oxygen.php' => config_path('oxygen.php')
         ], 'config');
 
         \View::share('error_message', "<small class='text-danger'>:message</small>");
@@ -53,10 +49,8 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register('Oxygencms\Core\Providers\RouteServiceProvider');
+        $this->app->register(RouteServiceProvider::class);
 
-        $this->mergeConfigFrom(
-            __DIR__.'/Config/oxygen.php', 'oxygen'
-        );
+        $this->mergeConfigFrom(__DIR__.'/../config/oxygen.php', 'oxygen');
     }
 }

@@ -4,7 +4,6 @@ namespace Oxygencms\Core\Controllers;
 
 use Validator;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 
 class ModelController extends Controller
@@ -53,7 +52,7 @@ class ModelController extends Controller
      */
     public function destroy(Model $instance, $id)
     {
-        $this->authorize('delete', 'App\\Models\\' . $instance->model_name);
+        $this->authorize('delete', get_class($instance));
 
         $instance::findOrFail($id)->delete();
 

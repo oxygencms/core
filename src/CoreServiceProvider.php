@@ -20,10 +20,6 @@ class CoreServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         (new Gate)->registerAuthGate();
-        
-        $router->pushMiddlewareToGroup('web', IntendedUrl::class);
-        $router->pushMiddlewareToGroup('web', SetLocale::class);
-        $router->aliasMiddleware('admin', BackOfficeAccess::class);
 
         $this->loadViewsFrom(__DIR__.'/../views', 'oxygencms');
 
@@ -36,8 +32,17 @@ class CoreServiceProvider extends ServiceProvider
         ], 'assets');
 
         $this->publishes([
+            __DIR__.'/../database/seeds' => database_path('seeds'),
+        ], 'seeds');
+
+        $this->publishes([
             __DIR__.'/../config/oxygen.php' => config_path('oxygen.php')
         ], 'config');
+
+        $router->pushMiddlewareToGroup('web', IntendedUrl::class);
+        $router->pushMiddlewareToGroup('web', SetLocale::class);
+
+        $router->aliasMiddleware('admin', BackOfficeAccess::class);
 
         \View::share('error_message', "<small class='text-danger'>:message</small>");
     }

@@ -1,22 +1,27 @@
 {
     "name": "oxygencms/core",
-    "description": "Oxy admin core",
+    "description": "Oxygen CMS core package.",
     "license": "MIT",
     "authors": [
         {
             "name": "Pavel Pavlov",
             "email": "pavlovp@icloud.com"
+        },
+        {
+            "name": "Martin Blagoev",
+            "email": "mb.reppair@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "oxygencms/users": "@dev",
+        "oxygencms/blocks": "@dev",
+        "oxygencms/commands": "@dev",
+        "oxygencms/menus": "@dev",
         "oxygencms/pages": "@dev",
         "oxygencms/phrases": "@dev",
-        "oxygencms/menus": "@dev",
-        "oxygencms/blocks": "@dev",
-        "oxygencms/commands": "@dev"
+        "oxygencms/uploads": "@dev",
+        "oxygencms/users": "@dev"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Oxygencms\\Core\\": "src/"

@@ -5,7 +5,6 @@ namespace Oxygencms\Core;
 use Validator;
 use Oxygencms\Core\Rules\ClassExists;
 use Illuminate\Support\Facades\Route;
-use Oxygencms\Core\Controllers\LanguageController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -39,16 +38,17 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         Route::middleware(['web', 'admin'])
-            ->prefix('admin')
-            ->namespace($this->namespace)
-            ->group(function () {
-                Route::patch('update/active/{model_name}/{model_id}', 'ModelController@updateActive');
-                Route::delete('seek-and-destroy/{model_name}/{model_id}', 'ModelController@destroy');
-                Route::get('/', 'DashboardController@index')->name('admin.dashboard');
-            });
+             ->prefix('admin')
+             ->namespace($this->namespace)
+             ->group(function () {
+                 Route::patch('update/active/{model_name}/{model_id}', 'ModelController@updateActive');
+                 Route::delete('seek-and-destroy/{model_name}/{model_id}', 'ModelController@destroy');
+                 Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+             });
 
-        // Set Locale
-        Route::get('lang/{lang}', LanguageController::class . '@setLocale')->name('language');
+        Route::middleware('web')->namespace($this->namespace)->group(function () {
+            Route::get('lang/{lang}', 'LanguageController@setLocale')->name('language');
+        });
     }
 
     /**
@@ -60,8 +60,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::bind('model_name', function ($model_name) {
 
-            // todo: fix name spacing issue
-            $class = app()->getNamespace() . 'Models\\' . $model_name;
+            $class = in_array($model_name, ['Permission', 'Role'])
+                ? 'Oxygencms\\Users\\Models\\' . $model_name
+                : 'Oxygencms\\' . str_plural($model_name) . '\\Models\\' . $model_name;
 
             Validator::make(['class' => $class], [
                 'class' => ['required', 'string', new ClassExists()],

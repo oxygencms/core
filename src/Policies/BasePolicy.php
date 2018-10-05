@@ -2,7 +2,7 @@
 
 namespace Oxygencms\Core\Policies;
 
-use App\Models\User;
+use Oxygencms\Users\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BasePolicy

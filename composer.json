@@ -12,15 +12,6 @@
             "email": "mb.reppair@gmail.com"
         }
     ],
-    "require": {
-        "oxygencms/blocks": "@dev",
-        "oxygencms/commands": "@dev",
-        "oxygencms/menus": "@dev",
-        "oxygencms/pages": "@dev",
-        "oxygencms/phrases": "@dev",
-        "oxygencms/uploads": "@dev",
-        "oxygencms/users": "@dev"
-    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {

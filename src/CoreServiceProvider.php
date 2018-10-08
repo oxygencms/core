@@ -3,7 +3,6 @@
 namespace Oxygencms\Core;
 
 use Illuminate\Routing\Router;
-use Oxygencms\Core\Gates\Gate;
 use Illuminate\Support\ServiceProvider;
 use Oxygencms\Core\Middleware\SetLocale;
 use Oxygencms\Core\Middleware\IntendedUrl;
@@ -19,8 +18,6 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        (new Gate)->registerAuthGate();
-
         $this->loadViewsFrom(__DIR__.'/../views', 'oxygencms');
 
         $this->publishes([
@@ -55,6 +52,8 @@ class CoreServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->register(AuthServiceProvider::class);
 
         $this->mergeConfigFrom(__DIR__.'/../config/oxygen.php', 'oxygen');
     }

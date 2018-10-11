@@ -64,6 +64,10 @@ class RouteServiceProvider extends ServiceProvider
                 ? 'Oxygencms\\Users\\Models\\' . $model_name
                 : 'Oxygencms\\' . str_plural($model_name) . '\\Models\\' . $model_name;
 
+            if (!class_exists($class)) {
+                $class = app()->getNamespace() . "Models\\$model_name";
+            }
+
             Validator::make(['class' => $class], [
                 'class' => ['required', 'string', new ClassExists()],
             ])->validate();

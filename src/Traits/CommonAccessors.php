@@ -64,7 +64,7 @@ trait CommonAccessors
 
         // show url
         if ($suffix == 'show') {
-            $route_key = $this->model_name = 'Page'
+            $route_key = $this->model_name == 'Page'
                 ? $this->slug
                 : $this->getRouteKey();
 

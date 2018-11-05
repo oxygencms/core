@@ -12,6 +12,12 @@
             "email": "mb.reppair@gmail.com"
         }
     ],
+    "require": {
+        "spatie/laravel-activitylog": "^3.1",
+        "spatie/laravel-menu": "^3.1",
+        "spatie/laravel-permission": "^2.20",
+        "spatie/laravel-translatable": "^2.2"
+    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {

@@ -39,11 +39,12 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware(['web', 'admin'])
              ->prefix('admin')
+             ->name('admin.')
              ->namespace($this->namespace)
              ->group(function () {
-                 Route::patch('update/active/{model_name}/{model_id}', 'ModelController@updateActive');
-                 Route::delete('seek-and-destroy/{model_name}/{model_id}', 'ModelController@destroy');
-                 Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+                 Route::patch('update/active/{model_name}/{model_id}', 'ModelController@updateActive')->name('update_active_model');
+                 Route::delete('seek-and-destroy/{model_name}/{model_id}', 'ModelController@destroy')->name('seek_and_destroy');
+                 Route::get('/', 'DashboardController@index')->name('dashboard');
              });
 
         Route::middleware('web')->namespace($this->namespace)->group(function () {
@@ -60,9 +61,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::bind('model_name', function ($model_name) {
 
-            $class = in_array($model_name, ['Permission', 'Role'])
-                ? 'Oxygencms\\Users\\Models\\' . $model_name
-                : 'Oxygencms\\' . str_plural($model_name) . '\\Models\\' . $model_name;
+            if (in_array($model_name, ['Permission', 'Role'])) {
+                $class = 'Oxygencms\\Users\\Models\\' . $model_name;
+            } elseif (in_array($model_name, ['Link'])) {
+                $class = 'Oxygencms\\Menus\\Models\\' . $model_name;
+            } else {
+                $class = 'Oxygencms\\' . str_plural($model_name) . '\\Models\\' . $model_name;
+            }
 
             if (!class_exists($class)) {
                 $class = app()->getNamespace() . "Models\\$model_name";

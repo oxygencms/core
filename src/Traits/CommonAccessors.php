@@ -59,7 +59,7 @@ trait CommonAccessors
 
             $route_name = implode('.', $this->route_name_prefixes) . ".$model_name.$suffix";
 
-            return route($route_name, $this->getRouteParams());
+            return route('admin.' . $route_name, $this->getRouteParams());
         }
 
         // show url
@@ -71,6 +71,6 @@ trait CommonAccessors
             return route($model_name . ".$suffix", $route_key);
         }
 
-        return route($model_name . ".$suffix", $this->getRouteKey());
+        return route('admin.' . $model_name . ".$suffix", $this->getRouteKey());
     }
 }

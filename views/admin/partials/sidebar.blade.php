@@ -27,49 +27,49 @@
 
         <!-- Pages -->
         <a class="nav-link {{ activeIfPath('admin/page*') }}"
-           href="{{ route('page.index') }}"
+           href="{{ route('admin.page.index') }}"
         >
             <i class="fas fa-file-signature"></i>Pages
         </a>
 
         <!-- Phrases -->
         <a class="nav-link {{ activeIfPath('admin/phrase*') }}"
-           href="{{ route('phrase.index') }}"
+           href="{{ route('admin.phrase.index') }}"
         >
             <i class="fas fa-language"></i>Phrases
         </a>
 
         <!-- Blocks -->
         <a class="nav-link {{ activeIfPath('admin/block*') }}"
-           href="{{ route('block.index') }}"
+           href="{{ route('admin.block.index') }}"
         >
             <i class="fas fa-th-large"></i>Blocks
         </a>
 
         <!-- Menus -->
         <a class="nav-link {{ activeIfPath('admin/menu*') }}"
-           href="{{ route('menu.index') }}"
+           href="{{ route('admin.menu.index') }}"
         >
             <i class="fas fa-bars"></i>Menus
         </a>
 
         <!-- Users -->
         <a class="nav-link {{ activeIfPath('admin/user*') }}"
-           href="{{ route('user.index') }}"
+           href="{{ route('admin.user.index') }}"
         >
             <i class="fas fa-users"></i>Users
         </a>
 
         <!-- Roles -->
         <a class="nav-link {{ activeIfPath('admin/role*') }}"
-           href="{{ route('role.index') }}"
+           href="{{ route('admin.role.index') }}"
         >
             <i class="fas fa-users-cog"></i>Roles
         </a>
 
         <!-- Permissions -->
         <a class="nav-link {{ activeIfPath('admin/permission*') }}"
-           href="{{ route('permission.index') }}"
+           href="{{ route('admin.permission.index') }}"
         >
             <i class="fas fa-shield-alt"></i>Permissions
         </a>

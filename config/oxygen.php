@@ -24,4 +24,8 @@ return [
 
     ],
 
+    'logs_controller' => \Oxygencms\Core\Controllers\LogsController::class,
+
+    'logs_routes' => ['index', 'show'],
+
 ];

@@ -50,6 +50,18 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')->namespace($this->namespace)->group(function () {
             Route::get('lang/{lang}', 'LanguageController@setLocale')->name('language');
         });
+
+        // Activity logs
+        Route::middleware(['web', 'admin'])
+             ->name('admin.')
+             ->prefix('admin')
+             ->group(function () {
+                 Route::resource(
+                     'log',
+                     config('oxygen.logs_controller'),
+                     ['only' => config('oxygen.logs_routes')]
+                 );
+             });
     }
 
     /**
@@ -69,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
                 $class = 'Oxygencms\\' . str_plural($model_name) . '\\Models\\' . $model_name;
             }
 
-            if (!class_exists($class)) {
+            if ( ! class_exists($class)) {
                 $class = app()->getNamespace() . "Models\\$model_name";
             }
 

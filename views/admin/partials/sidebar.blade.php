@@ -74,6 +74,13 @@
             <i class="fas fa-shield-alt"></i>Permissions
         </a>
 
+        <!-- Activity Logs -->
+        <a class="nav-link {{ activeIfPath('admin/log*') }}"
+           href="{{ route('admin.log.index') }}"
+        >
+            <i class="fas fa-history"></i>Logs
+        </a>
+
         {{--<span class="nav-section-title">Authentication</span>--}}
     </nav>
 </div>

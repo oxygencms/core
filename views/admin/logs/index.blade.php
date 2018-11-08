@@ -8,13 +8,27 @@
             <h1>Activity Logs</h1>
         </div>
 
-        <form action="{{ route('admin.log.index') }}" method="get" class="col-12">
-            <label for="action">Action</label>
+        <form action="{{ route('admin.log.index') }}" method="get" class="col-12 text-right">
+            <label for="action">Action </label>
             <select id="action" name="action">
                 <option name="created">created</option>
                 <option name="updated">updated</option>
                 <option name="deleted">deleted</option>
             </select>
+
+            <label for="since">Since </label>
+            <input type="date"
+                   id="since"
+                   name="since"
+                   value="{{ request('since') }}"
+            >
+
+            <label for="until">Until </label>
+            <input type="date"
+                   id="until"
+                   name="until"
+                   value="{{ request('until') }}"
+            >
 
             <button type="submit">Filter</button>
         </form>

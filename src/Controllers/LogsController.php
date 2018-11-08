@@ -3,6 +3,7 @@
 namespace Oxygencms\Core\Controllers;
 
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
@@ -20,6 +21,16 @@ class LogsController extends Controller
 
         if ($request->has('action')) {
             $query->where('description', $request->action);
+        }
+
+        [$since, $until] = [$request->since, $request->until];
+
+        if ($since) {
+            $query->where('created_at', '>=', Carbon::parse($since));
+        }
+
+        if ($since) {
+            $query->where('created_at', '<=', Carbon::parse($until));
         }
 
         $logs = $query->latest()->paginate(100);

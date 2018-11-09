@@ -35,6 +35,10 @@
                 <strong>Id: </strong>{{ $log->causer_id }}
                 <br>
                 <strong>Model: </strong>{{ $log->causer_type }}
+                <br>
+                @if(optional($log->causer)->email)
+                <strong>Email: </strong>{{ $log->causer->email }}
+                @endif
             </p>
         </div>
 

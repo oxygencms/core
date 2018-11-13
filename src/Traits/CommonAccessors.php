@@ -47,8 +47,9 @@ trait CommonAccessors
     }
 
     /**
-     * @param string $suffix
+     * todo: needs refactor
      *
+     * @param string $suffix
      * @return bool|string
      */
     protected function getUrlFor(string $suffix): string
@@ -64,11 +65,11 @@ trait CommonAccessors
 
         // show url
         if ($suffix == 'show') {
-            $route_key = $this->model_name == 'Page'
-                ? $this->slug
-                : $this->getRouteKey();
+            [$prefix, $route_key] = $this->model_name == 'Page'
+                ? ['', $this->slug]
+                : ['admin.', $this->getRouteKey()];
 
-            return route($model_name . ".$suffix", $route_key);
+            return route($prefix . $route_key . ".$suffix", $route_key);
         }
 
         return route('admin.' . $model_name . ".$suffix", $this->getRouteKey());

@@ -54,7 +54,9 @@ trait CommonAccessors
      */
     protected function getUrlFor(string $suffix): string
     {
-        $model_name = strtolower($this->model_name);
+        $pieces = preg_split('/(?=[A-Z])/', $this->model_name);
+
+        $model_name = str_slug(implode('-', array_filter($pieces)));
 
         if (isset($this->route_name_prefixes)) {
 

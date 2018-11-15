@@ -71,7 +71,7 @@ trait CommonAccessors
                 ? ['', $this->slug]
                 : ['admin.', $this->getRouteKey()];
 
-            return route($prefix . $route_key . ".$suffix", $route_key);
+            return route($prefix . $model_name . ".$suffix", $route_key);
         }
 
         return route('admin.' . $model_name . ".$suffix", $this->getRouteKey());

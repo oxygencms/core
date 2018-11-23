@@ -13,12 +13,19 @@ trait CommonQueries
      *
      * @param mixed $accessors
      * @param mixed $relations
+     * @param bool  $withTrashed
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function allWithAccessors($accessors, $relations = [])
+    public static function allWithAccessors($accessors, $relations = [], bool $withTrashed = false)
     {
-        return self::with($relations)->get()->each(function ($model) use ($accessors, $relations) {
+        $query = self::with($relations);
+
+        if ($withTrashed) {
+            $query->withTrashed();
+        }
+
+        return $query->get()->each(function ($model) use ($accessors, $relations) {
 
             $model->append($accessors);
 

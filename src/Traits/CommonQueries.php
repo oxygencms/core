@@ -3,6 +3,7 @@
 namespace Oxygencms\Core\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Route;
 
 trait CommonQueries
 {

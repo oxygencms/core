@@ -36,13 +36,42 @@ trait CommonQueries
 
             // append to related models
             if (is_string($relations)) {
-                $model->{$relations}->each->append($accessors);
+                self::appendAccessors($model, $relations, $accessors);
             } else {
                 foreach ($relations as $relation) {
-                    $model->{$relation}->each->append($accessors);
+                    self::appendAccessors($model, $relation, $accessors);
                 }
             }
         });
+    }
+
+    /**
+     * todo: revisit - it's questionable!
+     * @param $model
+     * @param $relations
+     * @param $accessors
+     *
+     * @return mixed
+     */
+    public static function appendAccessors($model, $relations, $accessors)
+    {
+        $collection = collect($accessors)->intersect(['show_url', 'create_url', 'edit_url', 'destroy_url']);
+
+        if ($collection->isEmpty()) {
+            return $model->{$relations}->each->append($accessors);
+        }
+
+        foreach ($collection as $item) {
+            $expl = explode('_', $item);
+
+            $suffix = array_pop($expl);
+
+            if (is_null(Route::getRoutes()->getByName("$model->model_name.$suffix"))) {
+                unset($accessors[array_search($item, $accessors)]);
+            }
+        }
+
+        return $model->{$relations}->each->append($accessors);
     }
 
     /**

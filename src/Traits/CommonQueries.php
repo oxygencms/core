@@ -72,7 +72,9 @@ trait CommonQueries
             }
         }
 
-        return $model->{$relations}->each->append($accessors);
+        return is_a($model->{$relations}, \Illuminate\Support\Collection::class)
+            ? $model->{$relations}->each->append($accessors)
+            : $model->{$relations}->append($accessors);
     }
 
     /**

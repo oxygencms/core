@@ -5,7 +5,6 @@ namespace Oxygencms\Core\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 
 class LogsController extends Controller
@@ -17,7 +16,7 @@ class LogsController extends Controller
      */
     public function index(Request $request)
     {
-        $query = DB::table('activity_log');
+        $query = Activity::query();
 
         if ($request->has('action')) {
             $query->where('description', $request->action);

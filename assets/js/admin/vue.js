@@ -64,6 +64,22 @@ Vue.component('doughnut-chart', {
     }
 });
 
+/**
+ * Get a translation from the stack by it's group and key.
+ *
+ * @param group_dot_key_string
+ */
+function getTranslation(group_dot_key_string) {
+
+    let [group, key] = group_dot_key_string.split('.');
+
+    if (typeof Oxy.translations[group] === 'undefined' || typeof Oxy.translations[group][key] === 'undefined') {
+        return group_dot_key_string;
+    }
+
+    return Oxy.translations[group][key];
+}
+
 import api from './requests';
 
 import MediaUploads from './components/MediaUploads';
@@ -102,6 +118,10 @@ export default new Vue({
 
         formatActive(bool) {
             return bool ? 'active' : 'inactive';
+        },
+
+        trans(group_dot_key_string) {
+            return getTranslation(group_dot_key_string);
         },
     },
 

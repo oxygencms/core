@@ -7,7 +7,7 @@
             relative_urls : false,
             remove_script_host : true,
             @if($model)
-            image_list: '{{ route('upload.list', [$model->model_name, $model->id]) }}',
+            image_list: '{{ route('admin.media.list', ['mediable_type' => get_class($model), 'mediable_id' => $model->id]) }}'.replace(/&amp;/g, '&'),
             @endif
             image_advtab: true,
             image_dimensions: false,

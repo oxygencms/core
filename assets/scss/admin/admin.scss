@@ -8,8 +8,6 @@
 
 @import "~vue-good-table/src/styles/style";
 
-@import "dropzone-uploads";
-
 @import "vue-table-component";
 
 @import "utils";
@@ -53,6 +51,10 @@ html {
   min-height: 350px;
 }
 
-#mceu_32 {
-  display: none !important;
+// TinyMCE
+.mce-floatpanel.mce-menu {
+  .mce-container-body.mce-stack-layout {
+    height: 300px;
+    overflow-y: scroll;
+  }
 }

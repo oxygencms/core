@@ -8,9 +8,7 @@ try {
     require('bootstrap');
 } catch (e) {}
 
-window.Dropzone = require('dropzone');
-
-// window.tinymce = require('tinymce');
+// window.Dropzone = require('dropzone');
 
 import './requests';
 

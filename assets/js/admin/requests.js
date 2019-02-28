@@ -37,9 +37,7 @@ function showResponseNotification(response)
  */
 function logErrorResponseAndShowErrorMessage(error)
 {
-    console.log(error.response);
-
-    console.log(error.message);
+    console.log(error.response, error.message);
 
     if (error.response && error.response.data && error.response.data.message) {
         oxy.notify(error.response.data.message, 'error', 5000);
@@ -49,43 +47,18 @@ function logErrorResponseAndShowErrorMessage(error)
 }
 
 /**
- * Update the active attribute of a model.
- *
- * @param model
- * @returns {*|void|Promise<T | never>}
- */
-function updateActive(model)
-{
-    let previousState = !model.active,
-        url = `/admin/update/active/${model.model_name}/${model.id}`;
-
-    axios.patch(url, {active: model.active})
-
-        .then(showResponseNotification)
-
-        .catch(error => {
-            if (previousState !== model.active) {
-                // set back the previous state
-                model.active = previousState;
-            }
-
-            logErrorResponseAndShowErrorMessage(error);
-        })
-}
-
-/**
  * Find and remove a model from the database.
  *
  * @param model
  */
 function destroy(model)
 {
-    axios.delete(`/admin/seek-and-destroy/${model.model_name}/${model.id}`)
+    let url = typeof model.destroy_url != 'undefined'
+        ? model.destroy_url
+        : `/admin/seek-and-destroy/${model.model_name}/${model.id}`;
+
+    axios.delete(url)
         .then(response => {
-
-            // const index = oxy.models.indexOf(model);
-
-            // oxy.models.splice(index, 1);
 
             oxy.models = oxy.models.filter(m => m.id !== model.id);
 
@@ -94,20 +67,12 @@ function destroy(model)
         }).catch(logErrorResponseAndShowErrorMessage);
 }
 
-function deleteSelectedModels() {
-    // for
-}
-
 export default {
+    axios,
 
     destroy,
-
-    updateActive,
-
-    deleteSelectedModels,
 
     showResponseNotification,
 
     logErrorResponseAndShowErrorMessage,
-
 }

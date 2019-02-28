@@ -23,6 +23,20 @@ function activeIfPath(string $path, string $output = 'active', $contains = null)
 }
 
 /**
+ * Get the url for a given page by it's system name.
+ *
+ * @param string $page_name
+ * @return string
+ */
+function routeToPage(string $page_name): string
+{
+    return route(
+        'page.show',
+        config('pages.model')::where('name', $page_name)->firstOrFail()->slug
+    );
+}
+
+/**
  * Session Notification Helper
  *
  * @param string $message

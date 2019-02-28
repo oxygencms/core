@@ -2,16 +2,10 @@
 import Vue from "vue";
 
 import Notifications from 'vue-notification';
-
 Vue.use(Notifications);
 
 import VueGoodTablePlugin from 'vue-good-table';
-
 Vue.use(VueGoodTablePlugin);
-
-import { TableComponent, TableColumn } from 'vue-table-component';
-Vue.component('table-component', TableComponent);
-Vue.component('table-column', TableColumn);
 
 import { Bar, HorizontalBar, Line, Pie, Doughnut } from 'vue-chartjs';
 
@@ -72,48 +66,24 @@ Vue.component('doughnut-chart', {
 
 import api from './requests';
 
-if (!window.Oxy) {
-    window.Oxy = {};
-}
+import MediaUploads from './components/MediaUploads';
 
 export default new Vue({
 
     el: '#oxy',
 
+    components: {
+        MediaUploads,
+    },
+
     data: {
-
-        chunks: [],
-
-        newChunk: '',
-
+        locale: Oxy.locale,
+        locales: Oxy.locales,
         models: Oxy.models || null,
-
-        selectedModels: {},
-
         sidebarHidden: JSON.parse(sessionStorage.getItem('sidebarHidden')) || false,
     },
 
     methods: {
-
-        addChunk() {
-            this.chunks.push({
-                id: 1,
-                value: this.newChunk
-            });
-            this.newChunk = '';
-        },
-        deleteSelectedRows() {
-            api.deleteSelectedModels();
-        },
-
-        toggleActive(model) {
-            api.updateActive(model);
-        },
-
-        formatActive(bool) {
-            return bool ? 'active' : 'inactive';
-        },
-
         confirmAndDestroy(model, question = "Delete selected item?") {
             if (confirm(question)) {
                 api.destroy(model);
@@ -130,8 +100,8 @@ export default new Vue({
             });
         },
 
-        selectionChanged(models) {
-            this.selectedModels = models.selectedRows;
+        formatActive(bool) {
+            return bool ? 'active' : 'inactive';
         },
     },
 

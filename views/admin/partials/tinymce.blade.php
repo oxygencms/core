@@ -1,7 +1,7 @@
 @push('js')
     <script src='{{ asset('tinymce/tinymce.min.js') }}'></script>
     <script>
-        tinymce.init({
+        let config = {
             selector: '{{ $selector }}',
             plugins: ['code', 'link', 'image'],
             relative_urls : false,
@@ -15,6 +15,14 @@
                 {title: 'None', value: ''},
                 {title: 'Responsive', value: 'img-responsive'},
             ],
-        });
+        };
+
+        
+        @if($model && $model->model_name == 'Block')
+        config['body_class'] = '{{ $model->name }}';
+        config['content_css'] = '/css/_blocks.css';
+        @endif
+
+        tinymce.init(config);
     </script>
 @endpush

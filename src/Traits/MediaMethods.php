@@ -14,7 +14,7 @@ trait MediaMethods
     {
         $media = $this->getFirstMedia('image');
 
-        return $media ? $media->getUrl($conversion) : $this->placeholder();
+        return $media ? $media->getFullUrl($conversion) : $this->placeholder();
     }
 
     /**
@@ -27,7 +27,7 @@ trait MediaMethods
     {
         $media = $this->getFirstMedia('images');
 
-        return $media ? $media->getUrl($conversion) : $this->placeholder();
+        return $media ? $media->getFullUrl($conversion) : $this->placeholder();
     }
 
     /**

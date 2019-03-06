@@ -90,7 +90,7 @@ class MediaController extends Controller
         $media->update($request->only('name', 'collection_name'));
 
         if (in_array($request->collection_name, ['image', 'images'])) {
-            Artisan::call('medialibrary:regenerate', ['--ids' => $media->id]);
+            Artisan::call('medialibrary:regenerate', ['--ids' => $media->id, '--force' => true]);
         }
 
         return compact('media');

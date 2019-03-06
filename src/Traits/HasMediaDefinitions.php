@@ -13,12 +13,19 @@ trait HasMediaDefinitions
      */
     public function registerMediaConversions(Media $media = null)
     {
+        // Images Collection
         foreach (config('oxygen.image_conversions') as $conversion => $width) {
             $this->addMediaConversion($conversion)
                  ->width($width)
                  ->performOnCollections('images')
                  ->nonQueued();
         }
+
+        // Image Collection
+        $this->addMediaConversion('xs')
+             ->width(config('oxygen.image_conversions.xs'))
+             ->performOnCollections('image')
+             ->nonQueued();
     }
 
     /**
@@ -27,6 +34,10 @@ trait HasMediaDefinitions
      */
     public function registerMediaCollections()
     {
+        $this->addMediaCollection('image')->singleFile()->acceptsFile(function ($file) {
+            return in_array($file->mimeType, config('oxygen.image_types'));
+        });
+
         $this->addMediaCollection('images')->acceptsFile(function ($file) {
             return in_array($file->mimeType, config('oxygen.image_types'));
         });

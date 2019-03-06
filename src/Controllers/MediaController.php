@@ -89,7 +89,7 @@ class MediaController extends Controller
 
         $media->update($request->only('name', 'collection_name'));
 
-        if ($request->collection_name == 'images') {
+        if (in_array($request->collection_name, ['image', 'images'])) {
             Artisan::call('medialibrary:regenerate', ['--ids' => $media->id]);
         }
 
@@ -112,6 +112,10 @@ class MediaController extends Controller
      */
     private function checkAcceptableTypes(Media $media, Request $request)
     {
+        if ($request->collection_name == 'image' && ! in_array($media->mime_type, config('oxygen.image_types'))) {
+            throw new Exception("Can not assign $media->mime_type to the image collection.");
+        }
+
         if ($request->collection_name == 'images' && ! in_array($media->mime_type, config('oxygen.image_types'))) {
             throw new Exception("Can not assign $media->mime_type to the images collection.");
         }

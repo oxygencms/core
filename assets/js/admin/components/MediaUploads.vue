@@ -123,7 +123,7 @@
                                         id="collection_name"
                                         v-model="modal_media.collection_name"
                                 >
-                                    <option v-for="collection in media_collections"
+                                    <option v-for="collection in collections"
                                             :value="collection"
                                             v-text="collection"
                                     ></option>
@@ -151,24 +151,6 @@
 <script>
     import api from './../requests';
 
-    window.something = async function something() {
-        async function callTimer() {
-            return await new Promise((resolve, reject) => {
-                console.log('init promise');
-                setTimeout(() => {
-                    console.log('done');
-                    resolve();
-                }, 3000);
-            });
-        }
-
-        console.log('call timer');
-
-        let promise = await callTimer();
-
-        console.log('timer finished');
-    };
-
     let MediaUploads = {
         name: 'media-uploads',
         props: [
@@ -178,15 +160,16 @@
             'mediable_type',
             'mediable_id',
             'media',
+            'media_collections',
         ],
         data: function () {
             return {
                 files: [],
                 input_label: 'Click here to upload files.',
                 uploads: this.$props.media !== undefined ? this.$props.media : [],
-                media_collections: this.$props.media_collections !== undefined
+                collections: this.$props.media_collections !== undefined
                     ? this.$props.media_collections
-                    : ['default', 'images', 'videos'],
+                    : ['default', 'image', 'images', 'videos'],
                 url: {
                     create: this.$props.create_url !== undefined ? this.$props.create_url : '/admin/media',
                     update: this.$props.update_url !== undefined ? this.$props.update_url : '/admin/media',

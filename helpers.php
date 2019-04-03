@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Detect Active Path
+ * Detect Active Path.
  *
  * Compare given path with the current path and return output if they match.
  * Very useful for navigation, marking if the link is active.

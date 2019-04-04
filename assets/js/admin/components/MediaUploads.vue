@@ -195,7 +195,7 @@
                     formData.append('mediable_type', this.$props.mediable_type);
                     formData.append('mediable_id', this.$props.mediable_id);
 
-                    await axios.post('/admin/media', formData)
+                    await axios.post(this.url.create, formData)
                         .then(response => {
                             this.uploads.push(response.data.media);
                             this.$parent.notify(`Successfully uploaded ${file.name}`, 'success');

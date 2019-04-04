@@ -4,9 +4,10 @@ namespace Oxygencms\Core\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Oxygencms\Core\Models\Temporary;
 use Spatie\MediaLibrary\Models\Media;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Validator;
 
 class MediaController extends Controller
 {
@@ -103,6 +104,20 @@ class MediaController extends Controller
     public function destroy(Media $media)
     {
         $media->delete();
+    }
+
+    /**
+     * Create a temporary model
+     *
+     * @return mixed
+     */
+    public function createTemporary()
+    {
+        $temporary = Temporary::create();
+
+        session(['temporary-id-for-user-' . auth()->id() => $temporary->id]);
+
+        return $temporary;
     }
 
     /**

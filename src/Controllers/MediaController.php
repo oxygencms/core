@@ -115,8 +115,6 @@ class MediaController extends Controller
     {
         $temporary = Temporary::create();
 
-        session(['temporary-id-for-user-' . auth()->id() => $temporary->id]);
-
         return $temporary;
     }
 

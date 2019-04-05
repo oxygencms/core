@@ -61,4 +61,9 @@ return [
     'video_types' => [
         'video/mp4',
     ],
+
+    /**
+     * The max count of the existing Temporary models
+     */
+    'temporaries_count' => 100,
 ];

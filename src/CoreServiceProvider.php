@@ -3,10 +3,12 @@
 namespace Oxygencms\Core;
 
 use Illuminate\Routing\Router;
+use Oxygencms\Core\Models\Temporary;
 use Illuminate\Support\ServiceProvider;
 use Oxygencms\Core\Middleware\SetLocale;
 use Oxygencms\Core\Middleware\IntendedUrl;
 use Oxygencms\Core\Middleware\BackOfficeAccess;
+use Oxygencms\Core\Observers\TemporaryObserver;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -42,6 +44,8 @@ class CoreServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin', BackOfficeAccess::class);
 
         \View::share('error_message', "<small class='text-danger'>:message</small>");
+
+        $this->registerModelObservers();
     }
 
     /**
@@ -56,5 +60,13 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->register(AuthServiceProvider::class);
 
         $this->mergeConfigFrom(__DIR__.'/../config/oxygen.php', 'oxygen');
+    }
+
+    /**
+     * Registers the model observers
+     */
+    private function registerModelObservers(): void
+    {
+        Temporary::observe(TemporaryObserver::class);
     }
 }

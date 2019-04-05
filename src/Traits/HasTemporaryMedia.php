@@ -22,8 +22,6 @@ trait HasTemporaryMedia
             $item->move($entity, $item->collection_name);
         });
 
-        session()->forget('temporary-id-for-user-' . auth()->id());
-
         $temporary->delete();
     }
 }

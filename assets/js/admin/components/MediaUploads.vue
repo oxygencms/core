@@ -177,11 +177,38 @@
                     delete: this.$props.delete_url !== undefined ? this.$props.delete_url : '/admin/media',
                 },
                 modal_media: {},
-                temporary_id: 0,
+                temporary_id: null,
             }
         },
 
+        mounted: function () {
+            this.$nextTick(function () {
+                // check for temporary model previously created
+                this.temporary_id = window.localStorage.getItem('temporary_media_id');
+
+                if (this.temporary_id) {
+                    this.setHiddenInput();
+
+                    this.getTemporaryMedia()
+                }
+            });
+        },
+
         methods: {
+            async getTemporaryMedia() {
+                if (!this.$props.mediable_id) {
+                    await api.axios.get(`/admin/media/temporary/${this.temporary_id}`)
+                        .then(response => this.uploads = response.data)
+                        .catch(errors => {
+                            window.localStorage.removeItem('temporary_media_id');
+
+                            this.temporary_id = null;
+
+                            console.log("Couldn't fetch the temporary media.", errors.response)
+                        });
+                }
+            },
+
             async storeMedia() {
                 this.files = Array.from(this.$refs.filesInput.files);
 
@@ -189,11 +216,13 @@
                 this.$refs.filesInput.disabled = true;
                 this.input_label = 'Working, please wait!';
 
-                if(! this.$props.mediable_id && ! this.temporary_id) {
-                    await api.axios.get('/admin/media/temporary')
+                if (!this.$props.mediable_id && !this.temporary_id) {
+                    // get one temporary model
+                    await api.axios.post('/admin/media/temporary')
                         .then(response => {
                             this.temporary_id = response.data.id;
                             this.setHiddenInput();
+                            window.localStorage.setItem('temporary_media_id', this.temporary_id);
                         })
                         .catch(errors => console.log(errors.response, 'Failed to create temporary model'));
                 }

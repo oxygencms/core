@@ -24,4 +24,19 @@ trait HasTemporaryMedia
 
         $temporary->delete();
     }
+
+    /**
+     * @param array $attributes
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public static function create(array $attributes = [])
+    {
+        $model = parent::query()->create($attributes);
+
+        if (request()->has('temporary_id')) {
+            self::moveMedia($model, request('temporary_id'));
+        }
+
+        return $model;
+    }
 }

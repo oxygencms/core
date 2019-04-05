@@ -70,7 +70,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::patch('admin/media/{media}', "$MediaController@update")->name('admin.media.update');
             Route::delete('admin/media/{media}', "$MediaController@destroy")->name('admin.media.destroy');
             Route::get('admin/media/list', "$MediaController@mediaList")->name('admin.media.list');
-            Route::get('admin/media/temporary', "$MediaController@createTemporary")->name('admin.media.temporary');
+            Route::post('admin/media/temporary', "$MediaController@createTemporary")->name('admin.media.temporary.create');
+            Route::get('admin/media/temporary/{temporary}', "$MediaController@getTemporaryMedia")->name('admin.media.temporary.get');
         });
     }
 

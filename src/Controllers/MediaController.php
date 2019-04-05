@@ -107,15 +107,25 @@ class MediaController extends Controller
     }
 
     /**
-     * Create a temporary model
+     * Create a temporary model.
      *
      * @return mixed
      */
     public function createTemporary()
     {
-        $temporary = Temporary::create();
+        return Temporary::create();
+    }
 
-        return $temporary;
+    /**
+     * Get the temporary media of a given temporary model.
+     * @param Temporary $temporary
+     * @return mixed
+     */
+    public function getTemporaryMedia(Temporary $temporary)
+    {
+        $temporary->mapMediaUrls();
+
+        return $temporary->media;
     }
 
     /**

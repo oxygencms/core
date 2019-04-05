@@ -162,6 +162,7 @@
             'media',
             'media_collections',
         ],
+
         data: function () {
             return {
                 files: [],
@@ -176,6 +177,7 @@
                     delete: this.$props.delete_url !== undefined ? this.$props.delete_url : '/admin/media',
                 },
                 modal_media: {},
+                temporary_id: 0,
             }
         },
 
@@ -187,13 +189,22 @@
                 this.$refs.filesInput.disabled = true;
                 this.input_label = 'Working, please wait!';
 
+                if(! this.$props.mediable_id && ! this.temporary_id) {
+                    await api.axios.get('/admin/media/temporary')
+                        .then(response => {
+                            this.temporary_id = response.data.id;
+                            this.setHiddenInput();
+                        })
+                        .catch(errors => console.log(errors.response, 'Failed to create temporary model'));
+                }
+
                 // store the files synchronously
                 for (let file of this.files) {
                     let formData = new FormData();
 
                     formData.append('file', file);
-                    formData.append('mediable_type', this.$props.mediable_type);
-                    formData.append('mediable_id', this.$props.mediable_id);
+                    formData.append('mediable_type', this.mediableType);
+                    formData.append('mediable_id', this.mediableId);
 
                     await axios.post(this.url.create, formData)
                         .then(response => {
@@ -263,7 +274,33 @@
                     button.textContent = 'Working, please wait!';
                 }
             },
+
+            setHiddenInput() {
+                let input = document.createElement('input');
+                input.name = 'temporary_id';
+                input.type = 'hidden';
+                input.value = this.temporary_id;
+                document.querySelector('main form').appendChild(input);
+            }
         },
+
+        computed: {
+            mediableType() {
+                if (this.$props.mediable_type) {
+                    return this.$props.mediable_type;
+                }
+
+                return 'Oxygencms\\Core\\Models\\Temporary'
+            },
+
+            mediableId() {
+                if (this.$props.mediable_id) {
+                    return this.$props.mediable_id;
+                }
+
+                return this.temporary_id;
+            },
+        }
     };
 
     export default MediaUploads;

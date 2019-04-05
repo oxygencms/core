@@ -35,6 +35,10 @@ class CoreServiceProvider extends ServiceProvider
         ], 'seeds');
 
         $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'migrations');
+
+        $this->publishes([
             __DIR__.'/../config/oxygen.php' => config_path('oxygen.php')
         ], 'config');
 

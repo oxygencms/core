@@ -65,5 +65,5 @@ return [
     /**
      * The max count of the existing Temporary models
      */
-    'temporaries_count' => 100,
+    'temporaries_count' => 10,
 ];

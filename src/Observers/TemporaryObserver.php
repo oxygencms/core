@@ -13,7 +13,7 @@ class TemporaryObserver
      */
     public function created()
     {
-        if(Temporary::count() > config('oxygen.temporaries_count')) {
+        if (Temporary::count() > config('oxygen.temporaries_count', 10)) {
             Temporary::first()->delete();
         }
     }

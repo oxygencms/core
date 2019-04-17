@@ -16,7 +16,7 @@ class BackOfficeAccess
      */
     public function handle($request, Closure $next)
     {
-        return auth()->check() && auth()->user()->can('access-backoffice')
+        return auth()->check() && auth()->user()->can('access-back-office')
             ? $next($request)
             : redirect('/');
     }

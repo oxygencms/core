@@ -14,13 +14,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::define('access-backoffice', function ($user) {
+        Gate::define('access-back-office', function ($user) {
 
-            if ($user->superuser) {
-                return true;
-            }
-
-            if ($user->can('manage_back_office') || $user->hasRole('observer')) {
+            if ($user->superuser || $user->can('access_back_office') {
                 return true;
             }
 

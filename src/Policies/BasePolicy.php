@@ -18,7 +18,7 @@ class BasePolicy
      */
     public function before(User $user)
     {
-        if ($user->superuser || $user->can('access-backoffice')) {
+        if ($user->superuser || $user->can('manage_back_office')) {
             return true;
         }
 

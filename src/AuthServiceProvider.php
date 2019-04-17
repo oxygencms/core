@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define('access-back-office', function ($user) {
 
-            if ($user->superuser || $user->can('access_back_office') {
+            if ($user->superuser || $user->can('access_back_office')) {
                 return true;
             }
 

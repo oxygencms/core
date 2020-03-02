@@ -2,6 +2,8 @@
 
 namespace Oxygencms\Core\Traits;
 
+use Illuminate\Support\Str;
+
 trait CommonAccessors
 {
     /**
@@ -47,7 +49,7 @@ trait CommonAccessors
     }
 
     /**
-     * todo: needs refactor
+     * todo: needs refactoring
      *
      * @param string $suffix
      * @return bool|string
@@ -56,7 +58,7 @@ trait CommonAccessors
     {
         $pieces = preg_split('/(?=[A-Z])/', $this->model_name);
 
-        $model_name = str_slug(implode('-', array_filter($pieces)));
+        $model_name = Str::slug(implode('-', array_filter($pieces)));
 
         if (isset($this->route_name_prefixes)) {
 
@@ -66,7 +68,7 @@ trait CommonAccessors
         }
 
         // show url
-        if ($suffix == 'show') {
+        if ($suffix === 'show') {
             [$prefix, $route_key] = $this->model_name == 'Page'
                 ? ['', $this->slug]
                 : ['admin.', $this->getRouteKey()];

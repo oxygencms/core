@@ -2,9 +2,9 @@
 
 namespace Oxygencms\Core\Controllers;
 
-use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 class ModelController extends Controller
 {

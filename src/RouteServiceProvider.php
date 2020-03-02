@@ -2,9 +2,10 @@
 
 namespace Oxygencms\Core;
 
-use Validator;
-use Oxygencms\Core\Rules\ClassExists;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Oxygencms\Core\Rules\ClassExists;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -77,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Bind the {model_name} to retrieve a model instance.
-     *
+     * todo: refactor this
      * @return void
      */
     protected function bindModelName(): void
@@ -89,7 +90,7 @@ class RouteServiceProvider extends ServiceProvider
             } elseif (in_array($model_name, ['Link'])) {
                 $class = 'Oxygencms\\Menus\\Models\\' . $model_name;
             } else {
-                $class = 'Oxygencms\\' . str_plural($model_name) . '\\Models\\' . $model_name;
+                $class = 'Oxygencms\\' . Str::plural($model_name) . '\\Models\\' . $model_name;
             }
 
             if ( ! class_exists($class)) {

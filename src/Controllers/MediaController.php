@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Oxygencms\Core\Models\Temporary;
 use Spatie\MediaLibrary\Models\Media;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Validator;
 
 class MediaController extends Controller
 {

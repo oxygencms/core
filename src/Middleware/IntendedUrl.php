@@ -18,7 +18,9 @@ class IntendedUrl
     {
         if (auth()->guest() && !request()->is('login')) {
 
-            session()->put('intended_url', $request->path());
+            if (! session()->has('intended_url')) {
+                session()->put('intended_url', $request->path());
+            }
 
             if ($request->is('*admin*')) {
                 return redirect('login');

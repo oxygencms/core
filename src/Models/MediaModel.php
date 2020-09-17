@@ -3,16 +3,16 @@
 namespace Oxygencms\Core\Models;
 
 use Oxygencms\Core\Traits\MediaMethods;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Oxygencms\Core\Traits\HasTemporaryMedia;
 use Oxygencms\Core\Traits\HasMediaDefinitions;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 abstract class MediaModel extends Model implements HasMedia
 {
-    use HasMediaDefinitions, MediaMethods, HasMediaTrait, HasTemporaryMedia {
-        HasMediaDefinitions::registerMediaCollections insteadof HasMediaTrait;
-        HasMediaDefinitions::registerMediaConversions insteadof HasMediaTrait;
-        HasMediaDefinitions::mapMediaUrls insteadof HasMediaTrait;
+    use HasMediaDefinitions, MediaMethods, InteractsWithMedia, HasTemporaryMedia {
+        HasMediaDefinitions::registerMediaCollections insteadof InteractsWithMedia;
+        HasMediaDefinitions::registerMediaConversions insteadof InteractsWithMedia;
+        HasMediaDefinitions::mapMediaUrls insteadof InteractsWithMedia;
     }
 }

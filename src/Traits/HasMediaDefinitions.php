@@ -2,7 +2,7 @@
 
 namespace Oxygencms\Core\Traits;
 
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 trait HasMediaDefinitions
 {
@@ -11,7 +11,7 @@ trait HasMediaDefinitions
      *
      * @param Media|null $media
      */
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         // Images Collection
         foreach (config('oxygen.image_conversions') as $conversion => $width) {
@@ -31,8 +31,9 @@ trait HasMediaDefinitions
     /**
      * Register media collections.
      *
+     * @param \Spatie\MediaLibrary\MediaCollections\Models\Media|null $media
      */
-    public function registerMediaCollections()
+    public function registerMediaCollections(Media $media = null): void
     {
         $this->addMediaCollection('image')->singleFile()->acceptsFile(function ($file) {
             return in_array($file->mimeType, config('oxygen.image_types'));

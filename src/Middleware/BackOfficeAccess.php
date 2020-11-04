@@ -21,7 +21,7 @@ class BackOfficeAccess
         }
 
         if (config('auth.admin.trusted_ips')) {
-            if (! in_array($request->ip(), explode('|', config('auth.admin.trusted_ips')))) {
+            if (! in_array($request->ip(), explode('|', config('oxygen.admin.trusted_ips')))) {
                 return redirect('/');
             }
         }

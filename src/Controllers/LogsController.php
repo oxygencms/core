@@ -32,7 +32,7 @@ class LogsController extends Controller
             $query->where('created_at', '<=', Carbon::parse($until));
         }
 
-        $logs = $query->latest()->paginate(100);
+        $logs = $query->orderBy('id', 'desc')->paginate(100);
 
         return view('oxygencms::admin.logs.index', compact('logs'));
     }

@@ -66,4 +66,8 @@ return [
      * The max count of the existing Temporary models
      */
     'temporaries_count' => 10,
+
+    'admin' => [
+        'trusted_ips' => env('ADMIN_TRUSTED_IPS', false),
+    ],
 ];

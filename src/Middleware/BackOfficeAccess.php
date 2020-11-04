@@ -16,8 +16,16 @@ class BackOfficeAccess
      */
     public function handle($request, Closure $next)
     {
-        return auth()->check() && auth()->user()->can('access-back-office')
-            ? $next($request)
-            : redirect('/');
+        if (! auth()->check() || ! auth()->user()->can('access-back-office')) {
+            return redirect('/');
+        }
+
+        if (config('auth.admin.trusted_ips')) {
+            if (! in_array($request->ip(), explode('|', config('auth.admin.trusted_ips')))) {
+                return redirect('/');
+            }
+        }
+
+        return $next($request);
     }
 }
